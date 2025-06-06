@@ -10,6 +10,9 @@ class ItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = ['id', 'name', 'image', 'price', 'purchase_date', 'cost_per_day', 'user']
         read_only_fields = ['user', 'cost_per_day']
+        extra_kwargs = {
+            'image': {'required': False, 'allow_null': True}
+        }
 
     def get_cost_per_day(self, obj):
         return round(obj.cost_per_day(), 2)
